@@ -1,22 +1,29 @@
 -- 各種テーブル削除
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS premiere;
 DROP TABLE IF EXISTS drink;
 
 -- ユーザーテーブル
 CREATE TABLE users(
-   id SERIAL PRIMARY KEY,
-   user_id INTEGER,
+   user_id SERIAL PRIMARY KEY,
    user_name TEXT,
    password TEXT,
    email TEXT,
-   address TEXT,
-   status INTEGER
+   address TEXT
+);
+
+-- プレミアテーブル
+CREATE TABLE premiere(
+   premiere_id SERIAL PRIMARY KEY,
+   premiere_name TEXT,
+   password TEXT,
+   email TEXT,
+   address TEXT
 );
 
 -- 商品テーブル
 CREATE TABLE drink(
-   id SERIAL PRIMARY KEY,
-   drink_id INTEGER,
+   drink_id SERIAL PRIMARY KEY,
    drink_name TEXT,
    price INTEGER,
    category TEXT,

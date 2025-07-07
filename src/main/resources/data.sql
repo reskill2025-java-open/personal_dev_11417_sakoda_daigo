@@ -1,5 +1,8 @@
 -- ユーザーテーブルデータ
-INSERT INTO users(user_id, user_name, password, email, address, status) VALUES(1, '柳田悠岐', 'himitu', 'gita1009@aaa', '福岡県福岡市中央区地行浜2-2-2', 2);
+INSERT INTO users(user_id, user_name, password, email, address) VALUES(1, '周東', 'himitu', 'syutou210@aaa', '福岡県福岡市中央区地行浜2-2-2');
+
+-- プレミアテーブルデータ
+INSERT INTO premiere(premiere_id, premiere_name, password, email, address) VALUES(1, '柳田悠岐', 'himitu', 'gita1009@aaa', '福岡県福岡市中央区地行浜2-2-2');
 
 
 -- 商品テーブルデータ
