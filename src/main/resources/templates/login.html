@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>ログイン画面</h1>
+<th:block th:if = "${message}">
+	<p th:text="${message}" style = "color:red"></p>
+</th:block>
+<form action = "/login" method = "post">
+<table>
+	<tr>
+		<th>名前</th><td><input type = "text" name = "name"></td>
+	</tr>
+	<tr>
+		<th>パスワード</th><td><input type = "password" name = "password"></td>
+	</tr>
+</table>
+<button>ログイン</button>
+</form>
+<a href = "/users">新規登録</a>
+
+</body>
+</html>

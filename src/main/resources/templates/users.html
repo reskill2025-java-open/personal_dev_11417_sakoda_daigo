@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>新規登録</h1>
+	<form action = "/users" method = "post">
+			<table border = "1">
+			<tr>
+				<th>名前</th>
+					<td>
+						<input type = "type" name = "name" id = "inputField" maxlength = "20" value = "" required >
+						<p id = "errorMessage" class="error"></p>
+					</td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+					<td>
+					<input type = "text" name = "password" value = "" required>
+					</td>
+				</tr>
+			<tr>
+				<th>メールアドレス</th>
+					<td>
+						<input type = "text" name = "email" value = "" required>
+					</td>
+			</tr>
+			<tr>
+				<th>住所</th>
+					<td>
+					<input type = "text" name = "address" value = "" required>
+					</td>
+				</tr>
+			</table>
+			<br>
+				<button>登録</button>
+			</form>
+			
+			<th:block th:if = "${name}">
+				<p>・名前は必須です</p>
+			</th:block>
+			<th:block th:if = "${password}">
+				<p>・パスワードは必須です</p>
+			</th:block>	
+			<th:block th:if = "${email}">
+				<p>・メールアドレスは必須です</p>
+			</th:block>
+			<th:block th:if = "${address}}">
+				<p>・パスワードは必須です</p>
+			</th:block>		
+			
+
+</body>
+</html>
