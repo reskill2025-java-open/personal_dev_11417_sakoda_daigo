@@ -6,17 +6,42 @@
 </head>
 <body>
 	<h1>商品一覧</h1>
+	<form action="/drink" method="get">
+		商品名
+		<input type="text" 
+		name="keyword" 
+		placeholder = "キーワードを入力してください"
+		th:value="${keyword}">
+	<br>
+			<input type="number" 
+			 name="maxPrice" 
+			 placeholder = "数字を入力してください"
+			 th:value="${maxPrice}">円以下
+	<br>
+		<select name = "categoryId">
+			<option value = "">
+				全商品
+			</option>
+			<option
+			 th:each = "category:${categoryList}"
+			 th:text = "${category.categoryName}"
+			 th:value = "${category.categoryId}"
+			 th:selected = "${selectedCategoryId == category.categoryId}">
+			</option>
+		</select>
+			<button>検索</button>	
+	</form>
 	<table border = "1">
 		<tr>
 			<th>No</th><th>商品名</th><th>価格</th><th>種類</th><th></th>
 		</tr>
 		<tr th:each="drink:${drink}">
 			<td th:text="${drink.drinkId}"></td>
-			<td><a th:href = "@{/detail/{drinkId}(drinkId = ${drink.drinkName})}"></a></td>
+			<td><a th:href = "@{/detail/{drinkId}(drinkId = ${drink.drinkId})}" th:text="${drink.drinkName}"></a></td>
 			<td th:text="${drink.price}"></td>
-			<td th:text="${drink.category}"></td>
+			<td th:text="${drink.categoryName}"></td>
 			<td>
-				<form action = "/drink/confirm" method = "get">
+				<form action = "/drink/cart/add" method = "post">
 					<input type = "hidden" name = "drinkId"
 					th:value = "${drink.drinkId}">
 					<button>カートに追加</button>
@@ -24,5 +49,5 @@
 			</td>
 		</tr>
 	</table>
-</body>
+	<a href="/drink/cart">カートを見る</a></body>
 </html>

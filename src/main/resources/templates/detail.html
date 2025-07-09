@@ -6,7 +6,49 @@
 </head>
 <body>
 	<h1>商品詳細</h1>
-	
-
-</body>
+		<table border="1">
+			<tr>
+				<th>商品ID</th>
+					<td th:text="${drink.drinkId}" readonly /></td>
+			</tr>
+			<tr>
+				<th>商品名</th>
+				<td>
+					<input type="text" name="drinkName" th:value="${drink.drinkName}" readonly />
+				</td>
+			</tr>
+			<tr>
+				<th>内容量</th>
+				<td>
+					<input type="text" name="amount" th:value="${drink.amount}" readonly />
+				</td>
+				</tr>
+			<tr>
+				<th>製造メーカー</th>
+					<td>
+					<input type="text" name="factory" th:value="${drink.factory}" readonly />
+				</td>
+			</tr>										
+			<tr>
+				<th>カテゴリー</th>
+				<td>
+					<input type="text" name="category" th:value="${drink.categoryName}" readonly />
+				</td>
+			</tr>
+			<tr>
+				<th>値段</th>
+				<td>
+					<input type="text" name="price" th:value="${drink.price}" readonly />
+				</td>
+			</tr>
+		</table>
+		
+		<form>
+			<input type = "hidden" name = "drinkId"
+			th:value = "${drink.drinkId}">
+			<button>カートに追加</button>
+		</form>
+		<a href="/drink/cart">カートを見る</a>
+		<a href="/drink">商品一覧に戻る</a>
+	</body>
 </html>
