@@ -43,12 +43,12 @@
 			</tr>
 		</table>
 		
-		<form>
+		<form  action = "/cart/add" method = "post">
 			<input type = "hidden" name = "drinkId"
 			th:value = "${drink.drinkId}">
 			<button>カートに追加</button>
-		</form>
-		<a href="/drink/cart">カートを見る</a>
+		</form >
+		<a href="/cart">カートを見る</a>
 		<a href="/drink">商品一覧に戻る</a>
 	</body>
 </html>

@@ -29,13 +29,3 @@ CREATE TABLE category(
    category_id SERIAL PRIMARY KEY,
    category_name TEXT
 );
-
--- 注文テーブル
-CREATE TABLE cart
-(
-   cart_id SERIAL PRIMARY KEY,
-   id INTEGER,
-   quantity INTEGER,
-   total_price INTEGER
-   
-);

@@ -1,14 +1,20 @@
 package com.example.demo.contoller;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.entity.Cart;
 import com.example.demo.entity.Drink;
+import com.example.demo.entity.Users;
+import com.example.demo.model.Cart;
+import com.example.demo.model.U;
 import com.example.demo.repository.DrinkRepository;
+import com.example.demo.repository.UsersRepository;
 
 @Controller
 public class CartController {
@@ -19,16 +25,26 @@ public class CartController {
 	@Autowired
 	DrinkRepository drinkRepository;
 	
+	@Autowired
+	UsersRepository usersRepository;
 	
-	@GetMapping ("/drink/cart")
-	public String index() {
-		
-		return "cart";
+	@Autowired
+	U u;
+	
+	@Autowired
+	HttpSession httpsession;
+	
+	
+	@GetMapping ("/cart")
+	public String index(Model model) {
+		Users users = new Users(); // 空のUsersオブジェクトを作成
+	    model.addAttribute("users", users); // モデルに追加
+	    		return "cart";
 	}
 	
 	// 指定した商品をカートに追加する
-	@PostMapping("/drink/cart/add")
-	public String add(
+	@PostMapping("/cart/add")
+	public String addCart(
 			@RequestParam("drinkId") int drinkId) {
 		
 		// 商品IDをキーに商品情報を取得する
@@ -41,15 +57,27 @@ public class CartController {
 		return "redirect:/cart";
 	}
 	
-	// 指定した商品をカートから削除
-	@PostMapping("/drink/cart/delete")
+//	 指定した商品をカートから削除
+	@PostMapping("/cart/delete")
 	public String deleteCart(
 		@RequestParam("drinkId") int drinkId) {
 		
 		// カート情報から削除
 		cart.delete(drinkId);
 		// 「/cart」にリダイレクト
-		return "reirect:/cart";
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/cart")
+	public String cart(
+			@RequestParam("users") String name,
+//			@RequestParam("email") String email,
+//			@RequestParam("address") String address,
+			Model model) {
+//		List<Users> n = usersRepository.findByName(name);
+//		u.setEmail(((Users) n).getEmail());
+//		u.setAddress(((Users) n).getAddress());
+		return "cart";
 	}
 //
 //		// 商品コードをキーに商品情報を取得する

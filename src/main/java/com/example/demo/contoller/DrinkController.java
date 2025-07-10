@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Drink;
+import com.example.demo.entity.Users;
+import com.example.demo.model.U;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.DrinkRepository;
+import com.example.demo.repository.UsersRepository;
 
 
 
@@ -27,14 +30,37 @@ public class DrinkController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
+	@Autowired
+	UsersRepository usersRepository;
+	
+	@Autowired
+	U u;
+	
 	@GetMapping ("/drink")
 	public String drink(
 //		@RequestParam(name = "drinkId", defaultValue = "") Integer drinkId,
 		@RequestParam(name = "keyword", defaultValue = "") String keyword,
 		@RequestParam(name = "maxPrice", defaultValue = "") Integer maxPrice,
 		@RequestParam(name = "categoryId", defaultValue = "") Integer categoryId,
+		@RequestParam(name = "name", defaultValue = "") String name,
+		@RequestParam(name = "email", defaultValue = "") String email,
+		@RequestParam(name = "address", defaultValue = "") String address,
 		Model model) {
 	
+		if(name.equals("")) {
+			Users users = usersRepository.findByName(u.getName());
+			u.setEmail(users.getEmail());
+			u.setAddress(users.getAddress());
+
+		} else { u.setName(name);
+		u.setEmail(email);
+		u.setAddress(address);
+			
+		}
+			
+		
+
+		
 		List<Category> categoryList = categoryRepository.findAll();
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("keyword", keyword);

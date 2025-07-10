@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>新規登録</h1>
-	<form action = "/users" method = "post">
+	<form action = "/drink" method = "get">
 			<table border = "1">
 			<tr>
 				<th>名前</th>
@@ -47,7 +47,7 @@
 			<th:block th:if = "${email}">
 				<p>・メールアドレスは必須です</p>
 			</th:block>
-			<th:block th:if = "${address}}">
+			<th:block th:if = "${address}">
 				<p>・パスワードは必須です</p>
 			</th:block>		
 			

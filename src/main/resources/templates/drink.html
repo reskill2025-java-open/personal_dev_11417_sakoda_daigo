@@ -41,7 +41,7 @@
 			<td th:text="${drink.price}"></td>
 			<td th:text="${drink.categoryName}"></td>
 			<td>
-				<form action = "/drink/cart/add" method = "post">
+				<form action = "/cart/add" method = "post">
 					<input type = "hidden" name = "drinkId"
 					th:value = "${drink.drinkId}">
 					<button>カートに追加</button>
@@ -49,5 +49,5 @@
 			</td>
 		</tr>
 	</table>
-	<a href="/drink/cart">カートを見る</a></body>
+	<a href="/cart">カートを見る</a></body>
 </html>

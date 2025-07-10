@@ -1,5 +1,7 @@
 package com.example.demo.contoller;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Users;
+import com.example.demo.model.U;
 import com.example.demo.repository.UsersRepository;
 
 
@@ -16,6 +19,12 @@ public class UsersController {
 	
 	@Autowired
 	UsersRepository usersRepository;	
+	
+	@Autowired
+	U u;
+	
+	@Autowired
+	HttpSession httpSession;
 	
 	
 	@GetMapping ("/login")
@@ -36,13 +45,13 @@ public class UsersController {
 			return "login";	
 		}
 		
-		else {
+//		else if (name.equals("")){
 			Users users = usersRepository.findByNameAndPassword(name,password);
 				if(users != null) {
 				// signin成功
 				// セッションに名前を覚えさせる
-				users.setName(name);
-
+//				users.setName(name);
+				u.setName(name);
 				
 				// redirect:をつけると
 				// 「GET」/drink
@@ -54,13 +63,14 @@ public class UsersController {
 				return "login";
 			}
 	}
-	}
+	
 	
 	@GetMapping ("/users")
-	public String users() 	{
-
+	public String users() {
 		return "users";
 	} 
+	
+}
 	
 //	@PostMapping("/users")
 //	public String users(
@@ -109,5 +119,4 @@ public class UsersController {
 //				return "users";
 //			}
 //}
-}
 

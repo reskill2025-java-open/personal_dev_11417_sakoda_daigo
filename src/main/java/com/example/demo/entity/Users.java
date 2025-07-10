@@ -62,21 +62,18 @@ public class Users {
 		this.address = address;
 	}
 	
-}
+	public Users() {
+		
+	}
 	
-//	public String getName() {
-//		return user_name;
-//	}
-//
-//	public Users() {
-//		
-//	}
-//	
-//	public Users(Integer user_id, String password, String user_name) {
-//		this.user_id = user_id;
-//		this.password = password;
-//		this.user_name = user_name;
-//		
-//	}
-//}
+	public Users(String name, String email, String address) {
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		
+		
+	}
+	
+
+}
 
