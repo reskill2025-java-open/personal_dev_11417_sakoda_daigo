@@ -47,15 +47,20 @@ public class DrinkController {
 		@RequestParam(name = "address", defaultValue = "") String address,
 		Model model) {
 	
-		if(name.equals("")) {
-			Users users = usersRepository.findByName(u.getName());
-			u.setEmail(users.getEmail());
-			u.setAddress(users.getAddress());
-
-		} else { u.setName(name);
-		u.setEmail(email);
-		u.setAddress(address);
-			
+		if (name.equals("")) {
+		    Users users = usersRepository.findByName(u.getName());
+		    if (users != null) {
+		        u.setEmail(users.getEmail());
+		        u.setAddress(users.getAddress());
+		    } else {
+		        // 対処例：空欄で初期化、またはログインページにリダイレクトしてもOK
+		        u.setEmail("");
+		        u.setAddress("");
+		    }
+		} else {
+		    u.setName(name);
+		    u.setEmail(email);
+		    u.setAddress(address);
 		}
 			
 		
