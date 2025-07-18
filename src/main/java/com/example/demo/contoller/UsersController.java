@@ -1,5 +1,7 @@
 package com.example.demo.contoller;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Users;
+import com.example.demo.model.Cart;
+import com.example.demo.model.U;
 import com.example.demo.repository.UsersRepository;
 
 
@@ -17,10 +21,20 @@ public class UsersController {
 	@Autowired
 	UsersRepository usersRepository;	
 	
+	@Autowired
+	U u;
+	
+	@Autowired
+	Cart cart;
+	
+	@Autowired
+	HttpSession httpSession;
+	
 	
 	@GetMapping ("/login")
 	public String login() 	{
-
+		u.clear();
+		cart.clear();
 		return "login";
 	} 
 	
@@ -30,18 +44,29 @@ public class UsersController {
 		@RequestParam(name = "password", defaultValue = "") String password,
 		Model model) {
 		
-		if(name.equals("") || password.equals("")) {
-			// 「必須です」と表示する
-			model.addAttribute("message", "必須です");
-			return "login";	
-		}
+		StringBuilder errorMsg = new StringBuilder(); 
 		
-		else {
+		 if (name.isEmpty()) {
+		        errorMsg.append("・名前を入力してください<br>");
+		    }
+
+		    if (password.isEmpty()) {
+		        errorMsg.append("・パスワードを入力してください<br>");
+		    }
+
+		    // エラーメッセージが1文字以上あれば表示
+		    if (errorMsg.length() > 0) {
+		        model.addAttribute("message", errorMsg.toString());
+		        return "login";
+		    }
+		
 			Users users = usersRepository.findByNameAndPassword(name,password);
 				if(users != null) {
 				// signin成功
 				// セッションに名前を覚えさせる
-				users.setName(name);
+				u.setName(name);
+				u.setStatus(users.getStatus());
+				u.setAge(users.getAge());
 
 				
 				// redirect:をつけると
@@ -50,17 +75,17 @@ public class UsersController {
 				return "redirect:/drink";
 			} else {
 				// signin失敗
-				model.addAttribute("message", "login失敗");
+				model.addAttribute("message", "・出力内容が違います");
 				return "login";
 			}
 	}
-	}
+	
 	
 	@GetMapping ("/users")
-	public String users() 	{
-
+	public String users() {
 		return "users";
 	} 
+}
 	
 //	@PostMapping("/users")
 //	public String users(
@@ -109,5 +134,4 @@ public class UsersController {
 //				return "users";
 //			}
 //}
-}
 

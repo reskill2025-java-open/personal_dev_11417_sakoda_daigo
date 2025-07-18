@@ -1,56 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel = "stylesheet" type = "text/css" href = "/css/style.css">
 </head>
 <body>
+	<header>
+		<h1>ショッピングサイト</h1>
+	</header>
+	<main>
 	<h1>新規登録</h1>
-	<form action = "/users" method = "post">
+	<p th:if="${formError}" th:text="${formError}" class="error"></p>
+	<form action = "/drink" method = "get">
 			<table border = "1">
 			<tr>
-				<th>名前</th>
+				<th>名前<span class="required-label">※必須</th>
 					<td>
-						<input type = "type" name = "name" id = "inputField" maxlength = "20" value = "" required >
+						<input type = "text" name = "name" id = "inputField" maxlength = "20" th:value="${name}" required >
 						<p id = "errorMessage" class="error"></p>
 					</td>
 			</tr>
 			<tr>
-				<th>パスワード</th>
+				<th>パスワード<span class="required-label">※必須</th>
 					<td>
-					<input type = "text" name = "password" value = "" required>
+					<input type = "text" name = "password" th:value="${password}" required>
 					</td>
 				</tr>
 			<tr>
-				<th>メールアドレス</th>
+				<th>メールアドレス<span class="required-label">※必須</th>
 					<td>
-						<input type = "text" name = "email" value = "" required>
+						<input type = "text" name = "email" th:value="${email}" required>
 					</td>
 			</tr>
 			<tr>
-				<th>住所</th>
+				<th>住所<span class="required-label">※必須</th>
 					<td>
-					<input type = "text" name = "address" value = "" required>
+					<input type = "text" name = "address" th:value="${address}" required>
 					</td>
-				</tr>
+			</tr>
+			<tr>
+				<th>年齢<span class="required-label">※必須</span></th>
+					<td>
+						<select name="age" >
+							<option value="">選択してください</option>
+							<th:block th:each="i : ${#numbers.sequence(0, 200)}">
+							    <option th:value="${i}" th:text="${i + '歳'}"
+							      th:selected="${age} == ${i}"></option>
+							           </th:block>
+						</select>
+					</td>
+			</tr>
+			<tr>
+				  <th style="text-align: right;">プレミア会員<span class="required-label">※任意（入会には毎月500円かかります。）
+				  </th>
+				  <td>
+					<!-- プレミア会員 → status=2、未チェックなら送られない -->
+					<input type="checkbox" name="status" value="1" th:checked="${status} == 1">プレミア会員に登録する
+			  	  </td>
+			</tr>
+
 			</table>
 			<br>
 				<button>登録</button>
 			</form>
 			
-			<th:block th:if = "${name}">
-				<p>・名前は必須です</p>
-			</th:block>
-			<th:block th:if = "${password}">
-				<p>・パスワードは必須です</p>
-			</th:block>	
-			<th:block th:if = "${email}">
-				<p>・メールアドレスは必須です</p>
-			</th:block>
-			<th:block th:if = "${address}}">
-				<p>・パスワードは必須です</p>
-			</th:block>		
 			
-
-</body>
+			</main>
+			<footer th:replace = "footer"></footer>
+			</body>
 </html>

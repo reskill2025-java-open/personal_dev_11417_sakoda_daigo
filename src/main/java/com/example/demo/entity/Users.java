@@ -21,6 +21,10 @@ public class Users {
 	private String email;
 	
 	private String address;
+	
+	private Integer age;
+	
+	private Integer	status;
 
 	public Integer getId() {
 		return id;
@@ -40,6 +44,14 @@ public class Users {
 
 	public String getAddress() {
 		return address;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public Integer getStatus() {
+		return status;
 	}
 
 	public void setId(Integer id) {
@@ -62,21 +74,26 @@ public class Users {
 		this.address = address;
 	}
 	
-}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Users() {
+		
+	}
 	
-//	public String getName() {
-//		return user_name;
-//	}
-//
-//	public Users() {
-//		
-//	}
-//	
-//	public Users(Integer user_id, String password, String user_name) {
-//		this.user_id = user_id;
-//		this.password = password;
-//		this.user_name = user_name;
-//		
-//	}
-//}
+	public Users(String name, String email, String address) {
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		
+		
+	}
+	
+
+}
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" type = "text/css" href = "/css/style.css">
+</head>
+<body>
+	<header th:classappend="${isPremium} ? 'premium' : ''">
+	<h1><a href = "/drink">ショッピングサイト</a></h1>
+	[[${@u.name}]]さんがログイン中
+	<a href = "/login">ログアウト</a>
+	</header>
+</body>
+</html>
