@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel = "stylesheet" type = "text/css" href = "/css/style.css">
 </head>
 <body>
-<h1>ログイン画面</h1>
-<th:block th:if = "${message}">
-	<p th:text="${message}" style = "color:red"></p>
-</th:block>
+<header>
+	<h1>ショッピングサイト</h1>
+</header>
+<main>
+	<th:block th:if="${message}">
+	    <p th:utext="${message}" style="color:red"></p>
+	</th:block>
 <form action = "/login" method = "post">
 <table>
 	<tr>
-		<th>名前</th><td><input type = "text" name = "name"></td>
+		<th>名前</th><td><input type = "text" name = "name" size="50" th:value="${name}" required></td>
 	</tr>
 	<tr>
-		<th>パスワード</th><td><input type = "password" name = "password"></td>
+		<th>パスワード</th><td><input type = "password" name = "password" size="50" th:value="${password}" required></td>
 	</tr>
 </table>
 <button>ログイン</button>
 </form>
 <a href = "/users">新規登録</a>
-
+</main>
+<footer th:replace = "footer"></footer>
 </body>
 </html>

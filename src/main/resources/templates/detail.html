@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel = "stylesheet" type = "text/css" href = "/css/style.css">
 </head>
 <body>
+	<header th:replace = "header"></header>
+	<main th:classappend="${isPremium} ? ' premium' : ''">
 	<h1>商品詳細</h1>
 		<table border="1">
 			<tr>
@@ -13,42 +16,62 @@
 			</tr>
 			<tr>
 				<th>商品名</th>
-				<td>
-					<input type="text" name="drinkName" th:value="${drink.drinkName}" readonly />
+					<td th:text="${drink.drinkName}" readonly />
 				</td>
 			</tr>
 			<tr>
 				<th>内容量</th>
-				<td>
-					<input type="text" name="amount" th:value="${drink.amount}" readonly />
+					<td th:text="${drink.amount} + ml" readonly />
 				</td>
-				</tr>
+			</tr>
 			<tr>
 				<th>製造メーカー</th>
-					<td>
-					<input type="text" name="factory" th:value="${drink.factory}" readonly />
+					<td th:text="${drink.factory}" readonly />
 				</td>
 			</tr>										
 			<tr>
 				<th>カテゴリー</th>
-				<td>
-					<input type="text" name="category" th:value="${drink.categoryName}" readonly />
+					<td th:text="${drink.categoryName}" readonly />
 				</td>
 			</tr>
 			<tr>
 				<th>値段</th>
-				<td>
-					<input type="text" name="price" th:value="${drink.price}" readonly />
+					<td th:text="${drink.price} + 円" readonly />
 				</td>
 			</tr>
+		<tr>
+		  <th>商品画像</th>
+			  <td>
+			    <img th:src="@{'/img/' + ${drink.img}}" alt="商品画像" style="width:200px; height:auto;" />
+			  </td>
+		</tr>
 		</table>
-		
-		<form  action = "/cart/add" method = "post">
-			<input type = "hidden" name = "drinkId"
-			th:value = "${drink.drinkId}">
-			<button>カートに追加</button>
-		</form >
-		<a href="/cart">カートを見る</a>
-		<a href="/drink">商品一覧に戻る</a>
-	</body>
+		<div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+		  <form action="/cart/add" method="post">
+		    <input type="hidden" name="drinkId" th:value="${drink.drinkId}">
+		    <button type="submit">カートに追加</button>
+		  </form>
+		  <form action="/drink" method="get">
+		    <button type="submit">商品一覧に戻る</button>
+		  </form>
+		</div>
+		</main>
+			<footer th:replace = "footer"></footer>
+			<script>
+			  window.addEventListener("DOMContentLoaded", function() {
+			    const checkbox = document.querySelector('input[name="status"]');
+			    const main = document.querySelector('main');
+
+			    if (!checkbox || !main) return;
+
+			    if (checkbox.checked) {
+			      main.classList.add("premium");
+			    }
+
+			    checkbox.addEventListener("change", function() {
+			      main.classList.toggle("premium", checkbox.checked);
+			    });
+			  });
+			</script>
+		</body>
 </html>

@@ -37,6 +37,8 @@ public class Drink {
 	@OneToOne
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id", insertable = false, updatable = false)
 	private Category category;
+	
+	private String img;
 
 	public Integer getDrinkId() {
 		return drinkId;
@@ -69,6 +71,10 @@ public class Drink {
 	public Integer getQuantity() {
 		return quantity;
 	}
+	
+	public String getImg() {
+	    return img;
+	}
 
 	public void setDrinkId(Integer drinkId) {
 		this.drinkId = drinkId;
@@ -96,5 +102,9 @@ public class Drink {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	
+	public void setImg(String img) {
+	    this.img = img;
 	}
 }

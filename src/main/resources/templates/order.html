@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel = "stylesheet" type = "text/css" href = "/css/style.css">
 </head>
 <body>
+	<header th:replace = "header"></header>
+	<main th:classappend="${isPremium} ? ' premium' : ''">
 	<h1>ご注文ありがとうございました</h1>
-	<a href="/drink">商品一覧に戻る</a>
-</body>
+	<p style="font-size: 32px;">お届け予定日：<span th:text="${deliveryDate}"></span></p>
+	<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgdA4q2XIi4GNYRWsPCa0RCky27TGfYsl6mH90-bBg5x6ACFWYVEddCBpvTATc9IL3SsnJaAMEeerMf0vF-qSbNbwtpkmLPgRnTqeCTyFIEN6EExb_BsOpdy98eSru0CejEaUTIDPSbrS9H/s800/seichi_roller_osu.png"
+	     width="250" height="250"
+	     class="slide-from-top-right">
+<!--		 <p style="font-size: 32px;">-->
+<!--		 	  <span th:text="${address}"></span> へのお届け予定日：<span th:text="${deliveryDate}"></span>-->
+<!--		 	</p>-->
+	<form action="/drink" method="get">
+		    <button type="submit">商品一覧に戻る</button>
+	</form>	
+	</main>
+		<footer th:replace = "footer"></footer>
+		<script>
+		  window.addEventListener("DOMContentLoaded", function() {
+		    const checkbox = document.querySelector('input[name="status"]');
+		    const main = document.querySelector('main');
+
+		    if (!checkbox || !main) return;
+
+		    if (checkbox.checked) {
+		      main.classList.add("premium");
+		    }
+
+		    checkbox.addEventListener("change", function() {
+		      main.classList.toggle("premium", checkbox.checked);
+		    });
+		  });
+		</script>
+	</body>
 </html>

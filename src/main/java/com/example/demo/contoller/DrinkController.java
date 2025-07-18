@@ -38,31 +38,55 @@ public class DrinkController {
 	
 	@GetMapping ("/drink")
 	public String drink(
-//		@RequestParam(name = "drinkId", defaultValue = "") Integer drinkId,
 		@RequestParam(name = "keyword", defaultValue = "") String keyword,
 		@RequestParam(name = "maxPrice", defaultValue = "") Integer maxPrice,
 		@RequestParam(name = "categoryId", defaultValue = "") Integer categoryId,
 		@RequestParam(name = "name", defaultValue = "") String name,
 		@RequestParam(name = "email", defaultValue = "") String email,
 		@RequestParam(name = "address", defaultValue = "") String address,
+		@RequestParam(name = "password", defaultValue = "") String password,
+		@RequestParam(name = "age", defaultValue = "") Integer age,
+		@RequestParam(name = "status", defaultValue = "2") Integer status,
 		Model model) {
 	
-		if (name.equals("")) {
-		    Users users = usersRepository.findByName(u.getName());
-		    if (users != null) {
-		        u.setEmail(users.getEmail());
-		        u.setAddress(users.getAddress());
-		    } else {
-		        // 対処例：空欄で初期化、またはログインページにリダイレクトしてもOK
-		        u.setEmail("");
-		        u.setAddress("");
-		    }
-		} else {
-		    u.setName(name);
+//		if (name == null || name.isEmpty() ||
+//			    email == null || email.isEmpty() ||
+//			    address == null || address.isEmpty() ||
+//			    password == null || password.isEmpty() ||
+//			    age == null) {
+//		        model.addAttribute("formError", "・必要事項を入力してください");
+//		        // 入力済み項目を戻す
+//		        model.addAttribute("name", name);
+//		        model.addAttribute("email", email);
+//		        model.addAttribute("address", address);
+//		        model.addAttribute("password", password);
+//		        model.addAttribute("age", age);
+//		        model.addAttribute("status", status);
+//
+//		        return "users"; // 新規登録画面のテンプレート名
+//		    }
+		
+		if(!(name.equals(""))) {
+			u.setName(name);
 		    u.setEmail(email);
 		    u.setAddress(address);
-		}
-			
+		    u.setPassword(password);
+		    u.setAge(age);
+		    u.setStatus(status);
+		    
+		    Users users = new Users();
+		    users.setName(name);
+		    users.setEmail(email);
+		    users.setAddress(address);
+		    users.setPassword(password);
+		    users.setAge(age);
+		    users.setStatus(status);
+
+		    
+		    usersRepository.save(users);
+		} 
+		
+		
 		
 
 		
@@ -72,6 +96,8 @@ public class DrinkController {
 		model.addAttribute("maxPrice", maxPrice);
 		model.addAttribute("selectedCategoryId", categoryId);
 		
+		model.addAttribute("isPremium", u.getStatus() == 1);
+
 		
 		
 		// 商品一覧情報の取得
@@ -115,8 +141,8 @@ public class DrinkController {
 					} else {
 						// カテゴリー指定なし
 						drinkList = drinkRepository.findAll();
-					}	
-					}	
+					}
+					}
 				}
 					model.addAttribute("drink", drinkList);
 		return "/drink";
@@ -129,6 +155,7 @@ public class DrinkController {
 		
 		model.addAttribute("drink", drink);
 		
+		model.addAttribute("isPremium", u.getStatus() == 1);
 		return "detail";
 	}
 }

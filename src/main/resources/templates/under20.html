@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace = "header"></header>
+	<main th:classappend="${isPremium} ? ' premium' : ''">
+		<th:block th:if="${errorMessage}">
+		  <p class="error-message"  th:text="${errorMessage}"></p>
+		</th:block>
+		<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWi4OFcNcX2h6YTYdE_8Cl2QfKgkbx3L2uKsFO0Cc_gldL55gm6joJHA-izbZVarORCVnvAWVdCY5Dy-Om7Wl8luSrihay8JxEMIyZ8bVfaXdcQub6OL8Fy3-4CrPeIG06DeKg-CkoBXA/s800/dame_man.png"
+		 class="heartbeat" width="250" height="250">
+		 <form action="/drink" method="get">
+		 	    <button type="submit">商品一覧に戻る</button>
+		  </form>
+	</main>
+	<footer th:replace = "footer"></footer>
+	<script>
+		  window.addEventListener("DOMContentLoaded", function() {
+		    const checkbox = document.querySelector('input[name="status"]');
+		    const main = document.querySelector('main');
+
+		    if (!checkbox || !main) return;
+
+		    if (checkbox.checked) {
+		      main.classList.add("premium");
+		    }
+
+		    checkbox.addEventListener("change", function() {
+		      main.classList.toggle("premium", checkbox.checked);
+		    });
+		  });
+		</script>
+</body>
+</html>

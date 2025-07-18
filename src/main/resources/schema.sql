@@ -2,7 +2,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS drink;
 DROP TABLE IF EXISTS category;
-DROP TABLE IF EXISTS cart;
 
 -- ユーザーテーブル
 CREATE TABLE users(
@@ -11,6 +10,7 @@ CREATE TABLE users(
    password TEXT,
    email TEXT,
    address TEXT,
+   age INTEGER,
    status INTEGER
 );
 
@@ -21,7 +21,8 @@ CREATE TABLE drink(
    price INTEGER,
    category_id INTEGER,
    amount INTEGER,
-   factory TEXT
+   factory TEXT,
+   img TEXT
 );
 
 -- カテゴリーテーブル
